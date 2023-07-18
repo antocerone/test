@@ -44,7 +44,7 @@ class PostController extends AbstractController
     #[Route('/api/get', name: 'endpoint_get_Post', methods: ['GET'])]
     public function getPost(PostList $PostList): JsonResponse
     {
-        return new JsonResponse($PostList->getAllWithUser());
+        return $this->json($PostList->getAllWithUser());
     }
 
 
@@ -56,7 +56,7 @@ class PostController extends AbstractController
     )]
     public function getPostDetail(PostDetail $postDetail, int $id): JsonResponse
     {
-        return new JsonResponse($postDetail->getPostDetail($id));
+        return $this->json($postDetail->getPostDetail($id));
     }
 
 
@@ -74,15 +74,17 @@ class PostController extends AbstractController
             // Options 1: App\Service\Post\Application\PostCreator
             // Options 2: App\Repository\Post\PostRepository
 
-            $post = new Post;
+            $postToCreate = new Post();
+            $postToCreate->setTitle($request->get('post_form')['title']);
+            $postToCreate->setBody($request->get('post_form')['body']);
 
-            $createPost = $postCreator->createPost($post);
+            $createPost = $postCreator->createPost($postToCreate);
 
             // uncomment for fun
             // $createPost = [];
 
             if (!empty($createPost)) {
-                return new JsonResponse($postCreator->createPost($post));
+                return $this->json($postCreator->createPost($post));
             } else {
                 $this->data['modal']['show']        = true;
                 $this->data['modal']['title']       = 'Create Post';
