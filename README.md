@@ -14,7 +14,7 @@ Technical Test
 
 ### GIT
 
-Download link: https://git-scm.com/download/win
+Download link: https://github.com/antocerone/test.git
 
 *Activate git in the PATH after installation*
 
