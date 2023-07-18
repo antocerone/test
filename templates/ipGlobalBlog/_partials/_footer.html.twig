@@ -1,0 +1,45 @@
+<footer
+	class="main-footer text-center">
+	<!-- Section: Social media -->
+	<section class="d-flex justify-content-center justify-content-lg-between p-3 border-bottom"></section>
+	<!-- End Section: Social media -->
+
+	<!-- Section: clients -->
+	<section class="clients p-3 shadow"></section>
+	<!-- End Section: clients -->
+
+	<!-- Section: footer -->
+	<section class="p-3">
+		<div class="row">
+			<div class="col-12 mt-4">
+				<h4 class="DancingScriptRegular">{{ client.slogan }}</h4>
+				<p>Consulta nuestro Aviso de
+					<a href="#">Privacidad</a>
+				</p>
+			</div>
+		</div>
+	</section>
+	<section class="copyright p-1">
+		<div class="container-fluid">
+			<div class="row text-shadow">
+				<div class="col-8 text-left">
+					<small>
+						Copyright © 2011
+						<a href="{{ path('app_home') }}">{{ client.title|e }}</a>
+						| Website
+						<a href="#" target="_blank">
+							<span>{{ client.web }}</span>
+						</a>
+						All rights reserved.
+					</small>
+				</div>
+				<div class="col-4 text-right">
+					<small>
+						Version
+						{{ version }}
+					</small>
+				</div>
+			</div>
+		</div>
+	</section>
+</footer>

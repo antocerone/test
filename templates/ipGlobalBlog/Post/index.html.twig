@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}ipGlobalBlog
+{% endblock %}
+
+{% block style %}
+	{{ parent() }}
+	<style type="text/css"></style>
+{% endblock %}
+
+{% block body %}
+	<div id="post-detail" class="">
+		<div class="row">
+			<div id="post" class="col">
+				{% include 'list.html.twig' %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

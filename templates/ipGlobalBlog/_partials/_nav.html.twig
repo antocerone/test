@@ -1,0 +1,226 @@
+<!-- Navbar -->
+<nav class="site-nav main-header navbar navbar-expand-md navbar-{{ bd_mode }}">
+
+	{% if app.user %}
+		<li class="nav-item d-sm-inline-block">
+			<a class="nav-link" data-widget="pushmenu" href="#" role="button">
+				<i class="fas fa-bars"></i>
+			</a>
+		</li>
+		{% else %}
+	{% endif %}
+	<div class="navbar-header">
+		<a class="navbar-brand" href="/">
+			<img src="{{ asset('images/client/' ~ client.title|e ~ '/logo/' ~ client.logo|e )}}" alt="{{ client.title|e }}" class="" style="min-width: 100px; max-width: 150px;">
+		</a>
+	</div>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+		<ul class="navbar-nav">
+			<li class="nav-item d-sm-inline-block">
+				<a href="#" class="nav-link">Blogs</a>
+				<ul>
+					{% if blogs is iterable %}
+						{% for blog in blogs %}
+							{% if blog.is_active == true %}
+								<li>
+									<a href="{{ path('app_blog_by_id', {'id':blog.id|e}) }}" class="nav-link" title="{{ blog.title|e }}">
+										{{ blog.title|e }}
+									</a>
+								</li>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+				</ul>
+			</li>
+
+			<li class="nav-item d-sm-inline-block">
+				<a href="#" class="nav-link">Api EndPoints</a>
+				<ul>
+					<li><a class="nav-link"href="{{path('endpoint_get_Post')}}" title="Endpoint GET para la obtención de posts">Endpoint GET posts</a></li>
+					<li><a class="nav-link"href="{{path('endpoint_postCreator')}}" title="Endpoint POST para la publicación de un post">Endpoint POST post</a></li>
+				</ul>
+			</li>
+		</ul>
+
+
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item d-sm-inline-block ml-auto">
+				<a class="nav-link" data-widget="navbar-search" href="#" role="button">
+					<i class="fas fa-search"></i>
+				</a>
+				<div class="navbar-search-block">
+					<form class="form-inline">
+						<div class="input-group input-group-sm">
+							<input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+							<div class="input-group-append">
+								<button class="btn btn-navbar" type="submit">
+									<i class="fas fa-search"></i>
+								</button>
+								<button class="btn btn-navbar" type="button" data-widget="navbar-search">
+									<i class="fas fa-times"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</li>
+			<li class="nav-item d-sm-inline-block dropdown">
+				{% set suma = chats|length %}
+				<a class="nav-link" data-toggle="dropdown" href="#">
+					<i class="far fa-comments"></i>
+					<span class="badge badge-danger navbar-badge">{{ suma }}</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+					{% if suma > 0 %}
+						{% for chat in chats %}
+							<a href="#" class="dropdown-item">
+								<div class="media">
+									<img src="{{ asset('images/users/icon/default.jpg') }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+									<div class="media-body">
+										<h3 class="dropdown-item-title">
+											{{ chat.autor }}
+											<span class="float-right text-sm text-{{ chat.estado }}">
+												<i class="fas fa-star"></i>
+											</span>
+										</h3>
+										<p class="text-sm">{{ chat.text }}</p>
+										<p class="text-sm text-muted">
+											<i class="far fa-clock mr-1"></i>
+											{{ chat.time }}
+											Hours Ago
+										</p>
+									</div>
+								</div>
+							</a>
+							<div class="dropdown-divider"></div>
+						{% endfor %}
+					{% endif %}
+					<a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+				</div>
+			</li>
+			<li class="nav-item d-sm-inline-block dropdown">
+				{% set suma = alertas.messages + alertas.requests + alertas.reports %}
+				<a class="nav-link" data-toggle="dropdown" href="#">
+					<i class="far fa-bell"></i>
+					<span class="badge badge-warning navbar-badge">{{ suma }}</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+					<span class="dropdown-item dropdown-header">
+						{{ suma }}
+						Notifications
+					</span>
+					{% if alertas.messages > 0 %}
+						<div class="dropdown-divider"></div>
+						<a href="#" class="dropdown-item">
+							<i class="fas fa-envelope mr-2"></i>
+							{{ alertas.messages }}
+							new messages
+							<span class="float-right text-muted text-sm">3 mins</span>
+						</a>
+					{% endif %}
+					{% if alertas.requests > 0 %}
+						<div class="dropdown-divider"></div>
+						<a href="#" class="dropdown-item">
+							<i class="fas fa-users mr-2"></i>
+							{{ alertas.requests }}
+							requests
+							<span class="float-right text-muted text-sm">12 hours</span>
+						</a>
+					{% endif %}
+					{% if alertas.reports > 0 %}
+						<div class="dropdown-divider"></div>
+						<a href="#" class="dropdown-item">
+							<i class="fas fa-file mr-2"></i>
+							{{ alertas.reports }}
+							new reports
+							<span class="float-right text-muted text-sm">2 days</span>
+						</a>
+						<div class="dropdown-divider"></div>
+					{% endif %}
+					<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+				</div>
+			</li>
+			<li class="nav-item d-sm-inline-block dropdown">
+				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+					<div class="dropdown-divider"></div>
+					<a href="#" class="bg-info color-palette dropdown-item dropdown-footer">Mis datos</a>
+
+					<div class="dropdown-divider"></div>
+					<span class="dropdown-item dropdown-header">15 Notifications</span>
+
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item">
+						<i class="fa-brands fa-square-facebook fa-fw"></i>
+						Registro
+						<span class="float-right text-muted text-sm">3 mins</span>
+					</a>
+
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item">
+						<i class="fa-brands fa-square-facebook fa-fw"></i>
+						4 new messages
+						<span class="float-right text-muted text-sm">3 mins</span>
+					</a>
+
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item">
+						<i class="fa-brands fa-square-twitter fa-fw"></i>
+						8 friend requests
+						<span class="float-right text-muted text-sm">12 hours</span>
+					</a>
+
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item">
+						<i class="fa-brands fa-linkedin fa-fw"></i>
+						3 new reports
+						<span class="float-right text-muted text-sm">2 days</span>
+					</a>
+
+					<div class="dropdown-divider"></div>
+					<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+
+
+					<a href="#" class="bg-danger color-palette dropdown-item dropdown-item dropdown-footer">Logout</a>
+				</div>
+
+				<a class="nav-link" data-toggle="dropdown">
+					<i class="fas fa-user"></i>
+				</a>
+				<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+					<a class="bg-success color-palette dropdown-item" href="{{ path('app_login_form') }}">
+						<i class="fas fa-user"></i>
+						Login
+					</a>
+
+					<div class="dropdown-divider"></div>
+					<a class="bg-primary color-palette dropdown-item" href="{{ path('app_register_user') }}">
+						Registrate
+					</a>
+
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item bg-warning color-palette" href="{{ path('app_forgot_password') }}">
+						Recuperar contraseña (password)
+					</a>
+				</div>
+			</li>
+			<li class="nav-item d-sm-inline-block">
+				<a class="nav-link" data-widget="fullscreen" href="#" role="button">
+					<i class="fas fa-expand-arrows-alt"></i>
+				</a>
+			</li>
+			<li class="nav-item d-sm-inline-block">
+				<a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+					<i class="fas fa-th-large"></i>
+				</a>
+			</li>
+		</ul>
+
+	</div>
+</nav>

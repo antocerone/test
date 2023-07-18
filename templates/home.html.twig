@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+
+{% block title %}ipGlobalBlog
+{% endblock %}
+
+{% block style %}
+	{{ parent() }}
+	<style type="text/css">
+		.important {
+			color: #336699;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="card">
+		<div class="card-header">
+			<h3 class="card-title">
+				<i class="fas fa-text-width"></i>
+				Prueba técnica
+			</h3>
+		</div>
+		<!-- /.card-header -->
+		<div class="card-body">
+			<ul>
+				Blog público
+				<li>
+					<strong>Req: 01</strong>
+					<br>
+					Lista de posts
+				</li>
+				<li>
+					<strong>Req: 01</strong>
+					<br>
+					Página de post, donde se mostrará una pequeña ficha del autor
+				</li>
+			</ul>
+			<ul>
+				API
+				<li>
+					<strong>Req: 01</strong>
+					<br>
+					Endpoint GET para la obtención de posts (y en cada post incluir la información del autor)
+				</li>
+				<li>
+					<strong>Req: 01</strong>
+					<br>
+					Endpoint POST para la publicación de un post.
+					<br>
+					No es necesario crear una base de datos ni hacer realmente persistencia.
+					<br>
+					En este punto nos interesa que realices la validación de los datos enviados y simules una inserción en base de datos.
+				</li>
+			</li>
+		</li>
+	</ul>
+
+	<ul>
+		Requisitos:
+		<li>PHP 8.*</li>
+		<li>Composer y estructura PSR-4 en el proyecto</li>
+		<li>La última versión estable de Symfony/Laravel</li>
+		<li>Testing unitario</li>
+		<li>La API debe devolver y consumir los datos en formato JSON</li>
+		<li>Programar en el idioma inglés</li>
+		<li>Uso de herramientas de análisis estático (por ejemplo PHPStan en modo máximo) y de estilo de código (por ejemplo PHP CS Fixer en modo @Symfony)</li>
+		<li>Uso de SCSS y Webpack, ya sea usando Webpack directamente o mediante Symfony Encore / Laravel Mix o similar</li>
+		<li>Ofrecer un Swagger/OpenAPI para la parte de la API</li>
+	</ul>
+{% endblock %}

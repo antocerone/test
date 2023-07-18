@@ -1,0 +1,6 @@
+{% for blog in blogs %}
+<li>
+	{{ blog.title|e }}
+	<span class="users-list-date">{{ blog.id }}</span>
+</li>
+{% endfor %}

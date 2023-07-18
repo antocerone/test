@@ -1,0 +1,8 @@
+<ul>
+	{% for post in posts %}
+		<li>
+			<a class="users-list-name" href="{{ path('app_post_show', {'id':post.userId|e}) }}">{{ post.title|e }}</a>
+			<span class="users-list-date">{{ post.title }}</span>
+		</li>
+	{% endfor %}
+</ul>
