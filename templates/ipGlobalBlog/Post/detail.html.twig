@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}ipGlobalBlog
+{% endblock %}
+
+{% block style %}
+	{{ parent() }}
+	<style type="text/css"></style>
+{% endblock %}
+
+{% block body %}
+	<div id="post-detail" class="">
+		<div class="row">
+			<div id="post" class="col">
+				<div class="card card-primary card-outline">
+					<div class="card-body box-profile">
+						{% if post is not empty %}
+							<div>Post</div>
+							<h3>{{ post.title }}</h3>
+							<div>{{ post.body }}</div>
+
+							{% if post.userId is iterable %}
+								<div class="text-center">
+									<img class="profile-user-img img-fluid img-circle" src="{{ asset('images/users/icon/default.jpg') }}" alt="{{ post.userId.name }}" title="{{ post.userId.name }}">
+								</div>
+
+								<h3 class="profile-username text-center">{{ post.userId.name }}</h3>
+
+								<p class="text-muted text-center">{{ post.userId.username }}</p>
+							{% endif %}
+						{% else %}
+							Post not founded!
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

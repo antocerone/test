@@ -1,0 +1,323 @@
+<!-- Main Sidebar Container -->
+<aside
+	class="main-sidebar main-sidebar-custom sidebar-{{ bd_mode }}-primary elevation-2">
+
+	<!-- Brand Logo -->
+	<a href="#" class="logotipo brand-link logo-switch">
+
+		<img style="max-width: 100px;" src="{{ asset('images/users/icon/default.jpg') }}" class="elevation-2" alt="user.name user.name">
+		<small class="info">
+			user.name
+															user.name
+		</small>
+	</a>
+	<small>
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{ path('admin') }}">
+				Admin
+			</a>
+		{% endif %}
+	</small>
+
+	<!-- Sidebar -->
+	<div class="sidebar">
+		<!-- Sidebar user panel (optional) -->
+		{#
+							<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+							<div class="image">
+							<img src="{{ asset('images/usuarios/icon/') }}user.name" class="img-circle elevation-2" alt="user.name">
+							</div>
+							<div class="info">
+							<a href="#" class="d-block">
+							user.name
+							<br>
+							user.name
+							</a>
+							</div>
+							</div>
+							#}
+
+
+		<!-- SidebarSearch Form -->
+			<div class="form-inline"> <div class="input-group" data-widget="sidebar-search">
+				<input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+				<div class="input-group-append">
+					<button class="btn btn-sidebar">
+						<i class="fas fa-search fa-fw"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Sidebar Menu -->
+		<nav class="mt-2">
+			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+				<!--
+																					<li class="nav-item">
+																						<a href="widgets.html" class="nav-link">
+																							<i class="nav-icon fas fa-th"></i>
+																							<p>
+																								Widgets
+																								<span class="right badge badge-danger">New</span>
+																							</p>
+																						</a>
+																					</li>
+																					-->
+
+				<!-- Usuarios
+																							<li class="nav-header">Administración</li>
+																							-->
+					<li class="nav-item"> <a href="#" class="nav-link">
+						<i class="fas fa-users"></i>
+						<p>
+							Usuarios
+							<i class="fas fa-angle-left right"></i>
+							<span class="badge badge-info right">1</span>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						{% if is_granted('ROLE_SUPER_ADMIN') %}
+							<li class="nav-item">
+								<a href="#" class="nav-link">
+									<i class="fas fa-user-lock nav-icon"></i>
+									<p>PENDIENTE: Instituciones</p>
+								</a>
+							</li>
+						{% endif %}
+
+						{% if is_granted('ROLE_ADMIN') %}
+							<li class="nav-item">
+								<a href="{{ path('app_show_user_permisos') }}" class="nav-link">
+									<i class="fas fa-user-lock nav-icon"></i>
+									<p>PENDIENTE: Permisos</p>
+									<small></small>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('app_admin_perfiles') }}" class="nav-link">
+									<i class="fas fa-theater-masks nav-icon"></i>
+									<p>PENDIENTE: Perfiles</p>
+									<small></small>
+								</a>
+							</li>
+							{% if is_granted('ROLE_RECTOR') %}
+								<small></small>
+							{% endif %}
+						{% endif %}
+						{% if is_granted('ROLE_DIRECTOR') %}
+							<small></small>
+						{% endif %}
+
+						{% if is_granted('ROLE_COORDINADOR') %}
+							<li class="nav-item">
+								<a href="#" class="nav-link">
+									<i class="fas fa-users nav-icon"></i>
+									<p>Grupos Pendiente</p>
+									<small></small>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('app_catedratico_clases') }}" class="nav-link">
+									<i class="fas fa-users nav-icon"></i>
+									<p>Clases</p>
+									<small></small>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('app_asignaturas') }}" class="nav-link">
+									<i class="fas fa-users nav-icon"></i>
+									<p>Asignaturas</p>
+									<small></small>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('app_show_clases_alumnos') }}" class="nav-link">
+									<i class="fas fa-users nav-icon"></i>
+									<p>Alumnos</p>
+									<small></small>
+								</a>
+							</li>
+						{% endif %}
+
+						{% if is_granted('ROLE_COORDINADOR_SERVICIOS_ESCOLARES') %}
+							<small></small>
+						{% endif %}
+
+						{% if is_granted('ROLE_CATEDRATICOS') %}
+							<small></small>
+						{% endif %}
+
+						{% if is_granted('ROLE_CATEDRATICOS ASISTENTE') %}
+							<small></small>
+						{% endif %}
+
+						{% if is_granted('ROLE_APODERADO') %}
+							<small></small>
+						{% endif %}
+
+						{% if is_granted('ROLE_ALUMNOS') %}
+							<li class="nav-item">
+								<a href="{{ path('app_alumno_solicitud_diploma') }}" class="nav-link">
+									<i class="fas fa-stamp nav-icon"></i>
+									<p>Solicitar diploma</p>
+									<small></small>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('app_user_documentos') }}" class="nav-link">
+									<i class="fas fa-user-lock nav-icon"></i>
+									<p>Documentos</p>
+									<small></small>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('app_user_calificaciones') }}" class="nav-link">
+									<i class="fas fa-user-lock nav-icon"></i>
+									<p>Calificaciones</p>
+									<small></small>
+								</a>
+							</li>
+						{% endif %}
+						{% if is_granted('ROLE_ALUMNO_OYENTE') %}
+							<small></small>
+						{% endif %}
+
+						<!--
+																																									<li class="nav-item">
+																																										<a href="forms/Gestores" class="nav-link">
+																																											<i class="fas fa-user-tie nav-icon"></i>
+																																											<p>Gestores</p>
+																																										</a>
+																																									</li>
+																																									<li class="nav-item">
+																																										<a href="forms/Profesores" class="nav-link">
+																																											<i class="fas fa-chalkboard-teacher nav-icon"></i>
+																																											<p>Profesores</p>
+																																										</a>
+																																									</li>
+																																									<li class="nav-item">
+																																										<a href="forms/Alumnos" class="nav-link">
+																																											<i class="fas fa-user-graduate nav-icon"></i>
+																																											<p>Alumnos</p>
+																																										</a>
+																																									</li>
+																																									-->
+
+						{% if is_granted('ROLE_USER') %}
+							<small></small>
+						{% endif %}
+
+						{% if is_granted('ROLE_PUBLIC') %}
+							<p>Esta zona está reservada a los usuarios que cumplen un rol en la aplicación.</p>
+							<p>Solicita tu perfil de alumno o catedrático al administrador.</p>
+						{% endif %}
+					</ul>
+				</li>
+
+				<!-- Inscripciones -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="far fa-id-card"></i>
+						<p>
+							Inscripciones
+							<i class="fas fa-angle-left right"></i>
+							<span class="badge badge-info right">1</span>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-list-ol nav-icon"></i>
+								<p>List</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-sort-numeric-up nav-icon"></i>
+								<p>Calificaciones</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-sort-alpha-up nav-icon"></i>
+								<p>Asistencias</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas-solid fa-file-circle-check fa-fw"></i>
+								<p>Documentos</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<!-- Pagos -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="fas fa-coins"></i>
+						<p>
+							Pagos
+							<i class="fas fa-angle-left right"></i>
+							<span class="badge badge-info right">1</span>
+						</p>
+					</a>
+					<ul
+						class="nav nav-treeview">
+						<!-- Pagos -->
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-money-bill-alt nav-icon"></i>
+								<p>List Pagos</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<!-- Calendario -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="fas fa-calendar-alt"></i>
+						<p>
+							Calendario
+							<i class="fas fa-angle-left right"></i>
+							<span class="badge badge-info right">1</span>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-calendar-check nav-icon"></i>
+								<p>Clases</p>
+							</a>
+						</li>
+
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fas fa-calendar-day nav-icon"></i>
+								<p>Eventos</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<!-- MISCELLANEOUS -->
+				<li class="nav-header">MISCELLANEOUS</li>
+
+				<!-- Helpdesk -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="fas fa-hand-holding-usd nav-icon"></i>
+						<p>Helpdesk</p>
+					</a>
+				</li>
+
+
+				<li class="mb-4 mt-4"></li>
+			</ul>
+		</nav>
+		<!-- /.sidebar-menu -->
+	</div>
+	<!-- /.sidebar -->
+</aside>

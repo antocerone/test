@@ -1,0 +1,21 @@
+<ul>
+	{% if posts is iterable %}
+		{% for post in posts %}
+			<li>
+				<div class="direct-chat-msg">
+					<div class="direct-chat-infos clearfix">
+						<span class="direct-chat-name float-left">{{ post.userId.name|e }}</span>
+						<span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+					</div>
+					<img class="direct-chat-img" src="/images/users/image/default.jpg" alt="message user image">
+					<div class="direct-chat-text">
+						{{ post.title|e }}
+						<a class="users-list-name" href="{{ path('app_post_show', {'id':post.id|e}) }}">
+							<span class="badge badge-primary">Post Detail</span>
+						</a>
+					</div>
+				</div>
+			</li>
+		{% endfor %}
+	{% endif %}
+</ul>

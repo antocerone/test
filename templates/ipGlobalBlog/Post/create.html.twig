@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}ipGlobalBlog
+{% endblock %}
+
+{% block style %}
+	{{ parent() }}
+	<style type="text/css"></style>
+{% endblock %}
+
+{% block body %}
+
+
+	<!-- Default box -->
+	<div class="card">
+		<div class="card-body row">
+			<div class="col">
+				{{ form_start(postForm) }}
+
+				<div class="form-group">
+					{{ form_row(postForm.title) }}
+				</div>
+				<div class="form-group">
+					{{ form_row(postForm.body) }}
+				</div>
+				<div class="form-group">
+					<input type="reset" class="btn btn-secondary" value="Clear">
+					<input type="submit" class="btn btn-primary" value="Send">
+				</div>
+				{{ form_end(postForm) }}
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

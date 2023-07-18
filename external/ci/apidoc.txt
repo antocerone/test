@@ -1,0 +1,46 @@
+openapi: 3.0.0
+servers:
+  - description: TechnicalTest
+    url: 
+info:
+  version: "1.0.0"
+  title: TechnicalTest
+  description: Technical Test for IGB
+paths:
+  /api/post:
+    get:
+      tags:
+        - Post
+      description: Form to register post
+      operationId: endpoint_postCreator
+      responses:
+        '200':
+          description: Html
+    post:
+      tags:
+        - Device
+      operationId: endpoint_postCreator->isSubmitted
+      parameters:
+        - in: query
+          name: title
+          description: Post name
+          schema:
+            type: string
+            format: text
+        - in: query
+          name: body
+          description: Post description
+          schema:
+            type: string
+            format: text
+      responses:
+        '200':
+          description: successfully registered Post
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uri
+                  example: '{"save" => "ok"}'

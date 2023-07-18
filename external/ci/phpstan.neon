@@ -1,0 +1,10 @@
+parameters:
+    checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false
+    ignoreErrors:
+#        - "#^Use required typed property over of nullable property$#"
+#        - "#^ Cannot call method getAllClassNames\(\)' on Doctrine\\\\Persistence\\\\Mapping\\\\Driver\\\\MappingDriver\|null$#"
+    level: 8
+    paths:
+        - src
+        - tests

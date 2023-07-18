@@ -1,0 +1,8 @@
+<ul>
+	{% for blog in blogs %}
+		<li>
+			<a class="users-list-name" href="{{ path('app_blog_show', {'id':blog.id|e}) }}">{{ blog.title|e }}</a>
+			<span class="users-list-date">{{ blog.title }}</span>
+		</li>
+	{% endfor %}
+</ul>
