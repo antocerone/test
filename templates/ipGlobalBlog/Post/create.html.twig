@@ -40,18 +40,22 @@
 		$(document).ready(function () {
 $("post_form").submit(function (event) {
 var formData = {
-title: $("#title").val(),
-body: $("#body").val(),
-superheroAlias: $("#superheroAlias").val()
+title: $("#post_form_title").val(),
+body: $("#post_form_body").val()
 };
 
 $.ajax({
 type: "POST",
 url: "api/post",
+xhrFields: {
+withCredentials: true
+},
 data: formData,
 dataType: "json",
 encode: true
 }).done(function (data) {
+console.log(data);
+}).fail(function () {
 console.log(data);
 });
 

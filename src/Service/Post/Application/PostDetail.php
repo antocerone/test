@@ -4,7 +4,7 @@ namespace App\Service\Post\Application;
 
 use App\Service\Post\Infrastructure\OutputAdapter\PostOutputAdapter;
 
-class PostDetail
+class PostDetail //implements PostDetailInputPort
 {
     public function __construct(
         private PostOutputAdapter $postOutputAdapter,

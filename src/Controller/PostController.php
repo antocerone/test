@@ -67,34 +67,23 @@ class PostController extends AbstractController
         $form = $this->createForm(PostFormType::class, $post);
         $form->handleRequest($request);
 
-        // if ($request->isMethod('POST')) {
-        // $form->submit($request->request->get($form->getName()));
-        if ($form->isSubmitted() && $form->isValid()) {
-            // insertion Post data...
-            // Options 1: App\Service\Post\Application\PostCreator
-            // Options 2: App\Repository\Post\PostRepository
+        if ($request->isMethod('POST')) {
+            // $form->submit($request->request->get($form->getName()));
+            // if ($form->isSubmitted() && $form->isValid()) {
 
-            $postToCreate = new Post();
-            $postToCreate->setTitle($request->get('post_form')['title']);
-            $postToCreate->setBody($request->get('post_form')['body']);
+            $res = $postCreator->fromForm($request);
 
-            $createPost = $postCreator->createPost($postToCreate);
-
-            // uncomment for fun
-            // $createPost = [];
-
-            if (!empty($createPost)) {
-                return $this->json($postCreator->createPost($post));
+            if (!empty($post)) {
+                return $this->json($res);
             } else {
-                $this->data['modal']['show']        = true;
-                $this->data['modal']['title']       = 'Create Post';
-                $this->data['modal']['message'][]   = 'Sorry, your comment has not been processed :(';
-                $this->data['modal']['message'][]   = 'Fire fire!! Cant connect with post services!';
-                $this->data['modal']['mode']        = 'modal';
-                $this->data['modal']['type']        = 'info';
+                return $this->json([
+                    'save' => false,
+                    'status' => 200,
+                    'message' => 'No data'
+                ]);
             }
+            // }
         }
-        // }
 
         $this->data['postForm'] = $form->createView();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Author\Infrastructure\outputPort;
+namespace App\Service\Author\Infrastructure\OutputPort;
 
 interface IAuthorRepositoryOutputPort
 {

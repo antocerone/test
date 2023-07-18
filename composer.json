@@ -100,7 +100,7 @@
             "@auto-scripts"
         ],
         "phpstan" : "phpstan analyse --debug -c ./external/ci/phpstan.neon",
-        "csfix" : "./vendor/bin/php-cs-fixer fix --dry-run --using-cache=no --verbose --config=./external/ci/.php_cs.dist",
+        "csfix" : "./vendor/bin/php-cs-fixer fix --dry-run --using-cache=no --verbose --config=./external/ci/.php_cs.dist.php",
         "ci" : [
             "@phpstan",
             "@csfix"
