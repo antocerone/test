@@ -256,13 +256,11 @@ $('#example2').DataTable({
 		</script>
 
 		{% if modal.mode == 'modal' %}
-			<!-- javascriptsBottom -->
 			<script>
 				$(document).ready(function () {
 $("#myModal").modal('show');
 });
 			</script>
-			<!-- end javascriptsBottom -->
 		{% endif %}
 
 		{% block js_bottom %}{% endblock %}

@@ -34,3 +34,29 @@
 
 
 {% endblock %}
+{% block js_bottom %}
+	{{ parent() }}
+	<script>
+		$(document).ready(function () {
+$("post_form").submit(function (event) {
+var formData = {
+title: $("#title").val(),
+body: $("#body").val(),
+superheroAlias: $("#superheroAlias").val()
+};
+
+$.ajax({
+type: "POST",
+url: "api/post",
+data: formData,
+dataType: "json",
+encode: true
+}).done(function (data) {
+console.log(data);
+});
+
+event.preventDefault();
+});
+});
+	</script>
+{% endblock %}
