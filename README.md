@@ -28,7 +28,7 @@ The project is located in the Gitlab repository:
 > `git@github.com:antocerone/test.git`
 >
 > HTTPS:
-> `https://nombre-repositorio/nombre.git`
+> `https://github.com/antocerone/test.git`
 
 Don't forget to execute:
 
