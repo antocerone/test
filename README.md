@@ -25,7 +25,7 @@ Download link: https://github.com/antocerone/test.git
 The project is located in the Gitlab repository:
 
 > SSH:
-> `git@mi.repositorio/nombre.git`
+> `git@github.com:antocerone/test.git`
 >
 > HTTPS:
 > `https://nombre-repositorio/nombre.git`
