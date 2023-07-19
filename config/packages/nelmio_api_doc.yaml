@@ -1,0 +1,26 @@
+nelmio_api_doc:
+  documentation:
+    info:
+      title: TechnicalTest
+      description: TechnicalTest app!
+      version: 1.0.0
+    paths:
+      /:
+        get:
+          description: Health Check endpoint
+          tags:
+            - name: Health check
+          responses:
+            200:
+              description: OK
+              content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        status: { type: string, example: 'ok' }
+    tags:
+      - name: Health check
+  areas: # to filter documented areas
+    path_patterns:
+      - ^/api(?!(/doc|/doc.json)$) # Accepts routes under /api except /api/doc
