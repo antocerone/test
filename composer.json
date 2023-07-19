@@ -39,6 +39,7 @@
         "symfony/string": "6.1.*",
         "symfony/translation": "6.1.*",
         "symfony/twig-bundle": "6.1.*",
+        "symfony/twig-pack": "^1.0",
         "symfony/validator": "6.1.*",
         "symfony/web-link": "6.1.*",
         "symfony/yaml": "6.1.*",
@@ -100,7 +101,7 @@
             "@auto-scripts"
         ],
         "phpstan" : "phpstan analyse --debug -c ./external/ci/phpstan.neon",
-        "csfix" : "./vendor/bin/php-cs-fixer fix --dry-run --using-cache=no --verbose --config=./external/ci/.php_cs.dist",
+        "csfix" : "./vendor/bin/php-cs-fixer fix --dry-run --using-cache=no --verbose --config=./external/ci/.php_cs.dist.php",
         "ci" : [
             "@phpstan",
             "@csfix"

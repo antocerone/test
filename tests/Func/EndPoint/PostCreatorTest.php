@@ -2,9 +2,6 @@
 
 namespace App\Tests\Unit\EndPoint;
 
-use App\Entity\Post;
-use App\Service\Post\Application\PostCreator;
-use App\Service\Post\Infrastructure\OutputAdapter\PostOutputAdapter;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class PostCreatorTest extends WebTestCase
@@ -14,19 +11,19 @@ class PostCreatorTest extends WebTestCase
     public function testcreatePost(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('POST', '/api/post');
 
         // Given
-        $post = new Post();
-        $post->setUserId(random_int(1, 10));
-        $post->setTitle('whatever');
-        $post->setBody('whatever');
+        $post_form = [
+            'post_form' => [
+                'title' => 'test title',
+                'body' => 'test body',
+            ]
+        ];
 
         // WhenSavePost
-
-        $postCreator = (new PostCreator())->createPost($post);
+        $crawler = $client->request('POST', '/api/post', $post_form);
 
         // thenVerifyContentResponse
-        $this->assertContainsEquals($postCreator, ['save' => 'ok']);
+        $this->assertResponseIsSuccessful();
     }
 }

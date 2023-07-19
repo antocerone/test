@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Blog;
-use App\Repository\Blog\BlogRepository;
 use App\Service\ClientDataService;
 use App\Service\Post\Application\PostList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

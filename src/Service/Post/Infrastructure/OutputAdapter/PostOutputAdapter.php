@@ -6,32 +6,33 @@ use App\Entity\Post;
 use App\Service\Author\Application\AuthorDetail;
 use App\Service\Author\Application\AuthorList;
 use App\Service\Post\commonVars;
-use App\Service\Post\Infrastructure\outputPort\IPostRepositoryOutputPort;
+use App\Service\Post\Infrastructure\OutputPort\IPostOutputPort;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class PostOutputAdapter implements IPostRepositoryOutputPort
+class PostOutputAdapter implements IPostOutputPort
 {
     public function __construct(
         private readonly HttpClientInterface $client,
     ) {
     }
 
-    public function save(Post $post): ?array
+    public function saveFromForm(Post $post): array
     {
-        // save Post... App\Service\Post\Domain\PostRepository, App\Service\Post\Infrastructure\InputAdapter, etc
-        return ['save' => 'ok'];
+        // save by App\Service\Post\Infrastructure\InputAdapter
+        // show dtoFront
+        $dtoFront = ['title' => $post->getTitle(), 'body' => $post->getBody()];
+
+        return [
+            'save' => 'ok',
+            'data' => $dtoFront
+        ];
     }
 
     public function getAll(): ?array
     {
-        $response = $this->client->request(
-            'GET',
-            commonVars::getInstance()::$path['jph'] . 'posts'
-        );
+        $response = $this->client->request('GET', commonVars::getInstance()::$path['jph'] . 'posts');
 
-        $content = (200 === $response->getStatusCode()) ? $response->toArray() : [];
-
-        return $content;
+        return (200 === $response->getStatusCode()) ? $response->toArray() : [];
     }
 
     public function getAllWithUser(): ?array
@@ -52,19 +53,14 @@ class PostOutputAdapter implements IPostRepositoryOutputPort
         return $content;
     }
 
-    public function getPostById(int $id): ?array
+    public function getPostById(int $id): array
     {
-        $response = $this->client->request(
-            'GET',
-            commonVars::getInstance()::$path['jph'] . 'posts/' . $id
-        );
+        $response = $this->client->request('GET', commonVars::getInstance()::$path['jph'] . 'posts/' . $id);
 
-        $content = (200 === $response->getStatusCode()) ? $response->toArray() : [];
-
-        return $content;
+        return (200 === $response->getStatusCode()) ? $response->toArray() : [];
     }
 
-    public function getPostByIdWithAuthor(int $id): ?array
+    public function getPostByIdWithAuthor(int $id): array
     {
         $content = $this->getPostById($id);
 

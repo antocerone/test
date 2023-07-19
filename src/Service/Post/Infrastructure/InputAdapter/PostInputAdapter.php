@@ -3,76 +3,38 @@
 namespace App\Service\Post\Infrastructure\InputAdapter;
 
 use App\Entity\Post;
-use App\Service\Author\Application\AuthorDetail;
-use App\Service\Author\Application\AuthorList;
-use App\Service\Post\commonVars;
-use App\Service\Post\Infrastructure\outputPort\IPostRepositoryOutputPort;
+use App\Service\Post\Infrastructure\InputPort\PostInputPort;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class PostInputAdapter implements IPostRepositoryOutputPort
+class PostInputAdapter implements PostInputPort
 {
     public function __construct(
         private readonly HttpClientInterface $client,
     ) {
     }
 
-    public function save(Post $post): ?array
+    public function createPost(Post $post)
     {
+    }
+
+    public function fromForm(Request $json): array
+    {
+        // App\Repository\Post\PostRepository
+        // App\Service\Post\Domain\PostRepository
+
+        // $response = $this->client->request('POST', commonVars::getInstance()::$path['jph'] . 'posts');
+        // $content = (200 === $response->getStatusCode()) ? $response->toArray() : [];
+
+        // curl, etc
         return ['save' => 'ok'];
     }
 
-    public function getAll(): ?array
+    public function mappingCsv()
     {
-        $response = $this->client->request(
-            'GET',
-            commonVars::getInstance()::$path['jph'] . 'posts'
-        );
-
-        $content = (200 === $response->getStatusCode()) ? $response->toArray() : [];
-
-        return $content;
     }
 
-    public function getAllWithUser(): ?array
+    public function curlCnx()
     {
-        $content = $this->getAll();
-
-        // MATCH AUTHOR
-        $authors = new AuthorList($this->client);
-
-        foreach ($authors->data as $author) {
-            $authorToMath[$author['id']] = $author;
-        }
-
-        foreach ($content as $key => $post) {
-            $content[$key]['userId'] = $authorToMath[$post['userId']] ?? $content[$key]['userId'];
-        }
-
-        return $content;
-    }
-
-    public function getPostById(int $id): ?array
-    {
-        $response = $this->client->request(
-            'GET',
-            commonVars::getInstance()::$path['jph'] . 'posts/' . $id
-        );
-
-        $content = (200 === $response->getStatusCode()) ? $response->toArray() : [];
-
-        return $content;
-    }
-
-    public function getPostByIdWithAuthor(int $id): ?array
-    {
-        $content = $this->getPostById($id);
-
-        // AUTHOR
-        if (!empty($content)) {
-            $author = new AuthorDetail($this->client, $content['userId']);
-            $content['userId'] = $author->data;
-        }
-
-        return $content;
     }
 }
