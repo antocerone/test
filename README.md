@@ -36,10 +36,11 @@ Don't forget to execute:
 
 ## CI
 *The static code analyzers of phpstan and phpfixer are used using the following command*
+> `composer phpstan`
+
+> `composer csfix`
+
+*Run all the fixer*
 > `composer ci`
 
 
-## Others
-*search the line and play nex*
-
-> `uncomment for fun`
