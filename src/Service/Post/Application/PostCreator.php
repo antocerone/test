@@ -15,6 +15,7 @@ class PostCreator implements PostInputPort
     public function __construct(
         private PostOutputAdapter $postOutputAdapter,
     ) {
+        // $this->validator = ...
     }
 
     public function createPost(Post $post)
@@ -23,6 +24,9 @@ class PostCreator implements PostInputPort
 
     public function fromForm(Request $request)
     {
+        // ex call valid data 
+        // $title = $this->validator->title($request->get('post_form')['title']);
+
         $post = new Post();
         $post->setTitle($request->get('post_form')['title']);
         $post->setBody($request->get('post_form')['body']);

@@ -68,8 +68,6 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($request->isMethod('POST')) {
-            // $form->submit($request->request->get($form->getName()));
-            // if ($form->isSubmitted() && $form->isValid()) {
 
             $res = $postCreator->fromForm($request);
 
@@ -82,7 +80,6 @@ class PostController extends AbstractController
                     'message' => 'No data'
                 ]);
             }
-            // }
         }
 
         $this->data['postForm'] = $form->createView();
