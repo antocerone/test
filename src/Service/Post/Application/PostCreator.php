@@ -18,11 +18,13 @@ class PostCreator implements PostInputPort
         // $this->validator = ...
     }
 
-    public function createPost(Post $post)
+    public function createPost(Post $post): bool
     {
+        // save by App\Service\Post\Infrastructure\PostInputAdapter->fromForm($post)
+        return true;
     }
 
-    public function fromForm(Request $request)
+    public function fromForm(Request $request): array
     {
         // ex call valid data 
         // $title = $this->validator->title($request->get('post_form')['title']);
@@ -31,7 +33,10 @@ class PostCreator implements PostInputPort
         $post->setTitle($request->get('post_form')['title']);
         $post->setBody($request->get('post_form')['body']);
 
-        return $this->postOutputAdapter->saveFromForm($post);
+        if ($this->createPost($post)) {
+            return $this->postOutputAdapter->saveFromForm($post);
+        }
+        return [];
     }
 
     public function mappingCsv()

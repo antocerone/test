@@ -18,7 +18,6 @@ class PostOutputAdapter implements IPostOutputPort
 
     public function saveFromForm(Post $post): array
     {
-        // save by App\Service\Post\Infrastructure\InputAdapter
         // show dtoFront
         $dtoFront = ['title' => $post->getTitle(), 'body' => $post->getBody()];
 

@@ -71,7 +71,7 @@ class PostController extends AbstractController
 
             $res = $postCreator->fromForm($request);
 
-            if (!empty($post)) {
+            if (!empty($res)) {
                 return $this->json($res);
             } else {
                 return $this->json([
